@@ -1,0 +1,99 @@
+﻿@model WebExamen.ViewModels.DashboardViewModel
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="mb-4">
+    <h2 class="mb-1">Panel de administración</h2>
+    <p class="text-muted mb-0">Resumen general del sistema.</p>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Total de hoteles</h6>
+                <h2>@Model.TotalHoteles</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Total de usuarios</h6>
+                <h2>@Model.TotalUsuarios</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Total de reservas</h6>
+                <h2>@Model.TotalReservas</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card shadow-sm">
+            <div class="card-header">Reservas por mes</div>
+            <div class="card-body">
+                <canvas id="reservasMesChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-header">Hoteles más reservados</div>
+            <div class="card-body">
+                <canvas id="hotelesChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const meses = @Html.Raw(JsonSerializer.Serialize(Model.Meses));
+        const reservasPorMes = @Html.Raw(JsonSerializer.Serialize(Model.ReservasPorMes));
+        const hotelesLabels = @Html.Raw(JsonSerializer.Serialize(Model.HotelesLabels));
+        const hotelesCantidades = @Html.Raw(JsonSerializer.Serialize(Model.HotelesCantidades));
+
+        const ctx1 = document.getElementById('reservasMesChart');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: meses,
+                datasets: [{
+                    label: 'Reservas',
+                    data: reservasPorMes,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        const ctx2 = document.getElementById('hotelesChart');
+        new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: hotelesLabels,
+                datasets: [{
+                    label: 'Reservas',
+                    data: hotelesCantidades
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+}

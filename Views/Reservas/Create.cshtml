@@ -1,0 +1,47 @@
+﻿@model WebExamen.ViewModels.ReservaCreateViewModel
+
+@{
+    ViewData["Title"] = "Nueva reserva";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                Registrar reserva
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="HotelId" class="form-label"></label>
+                        <select asp-for="HotelId" asp-items="Model.Hoteles" class="form-select">
+                            <option value="">Seleccione un hotel</option>
+                        </select>
+                        <span asp-validation-for="HotelId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="FechaInicio" class="form-label"></label>
+                        <input asp-for="FechaInicio" class="form-control" />
+                        <span asp-validation-for="FechaInicio" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="FechaFin" class="form-label"></label>
+                        <input asp-for="FechaFin" class="form-control" />
+                        <span asp-validation-for="FechaFin" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Guardar reserva</button>
+                    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

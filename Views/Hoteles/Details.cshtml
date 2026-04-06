@@ -1,0 +1,31 @@
+﻿@model WebExamen.Models.Hotel
+
+@{
+    ViewData["Title"] = "Detalle del Hotel";
+}
+
+<div class="container mt-4">
+    <h2>Detalle del Hotel</h2>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Model.Nombre</dd>
+
+        <dt class="col-sm-3">Dirección</dt>
+        <dd class="col-sm-9">@Model.Direccion</dd>
+
+        <dt class="col-sm-3">Precio por noche</dt>
+        <dd class="col-sm-9">Bs. @Model.PrecioPorNoche</dd>
+
+        <dt class="col-sm-3">Descripción</dt>
+        <dd class="col-sm-9">@Model.Descripcion</dd>
+    </dl>
+
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+
+    @if (User.IsInRole("Administrador"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    }
+</div>

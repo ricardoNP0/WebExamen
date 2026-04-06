@@ -1,0 +1,29 @@
+﻿@model WebExamen.Models.Reserva
+
+@{
+    ViewData["Title"] = "Detalle de reserva";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header bg-info text-white">
+        Detalle de la reserva
+    </div>
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Cliente</dt>
+            <dd class="col-sm-9">@(Model.Usuario?.NombreCompleto ?? Model.Usuario?.Email)</dd>
+
+            <dt class="col-sm-3">Hotel</dt>
+            <dd class="col-sm-9">@Model.Hotel?.Nombre</dd>
+
+            <dt class="col-sm-3">Fecha de inicio</dt>
+            <dd class="col-sm-9">@Model.FechaInicio.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Fecha de fin</dt>
+            <dd class="col-sm-9">@Model.FechaFin.ToString("dd/MM/yyyy")</dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Index" class="btn btn-secondary">Volver</a>
+    </div>
+</div>
