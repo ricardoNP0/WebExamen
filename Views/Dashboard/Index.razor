@@ -1,0 +1,51 @@
+﻿@model WebExamen.ViewModels.DashboardViewModel
+
+<div class="container mt-4">
+    <h2 class="mb-4">Panel de Control</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white mb-3">
+                <div class="card-body text-center">
+                    <h5>Hoteles</h5>
+                    <p class="display-6">@Model.TotalHoteles</p> [cite: 50]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-success text-white mb-3">
+                <div class="card-body text-center">
+                    <h5>Reservas</h5>
+                    <p class="display-6">@Model.TotalReservas</p> [cite: 52]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-info text-white mb-3">
+                <div class="card-body text-center">
+                    <h5>Usuarios</h5>
+                    <p class="display-6">@Model.TotalUsuarios</p> [cite: 51]
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-4 p-3 shadow-sm">
+        <h6>Reservas por Mes</h6> [cite: 53]
+        <canvas id="graficoVania"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    new Chart(document.getElementById('graficoVania'), {
+        type: 'line',
+        data: {
+            labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May'],
+            datasets: [{
+                label: 'Reservas',
+                data: @Html.Raw(Json.Serialize(Model.ReservasPorMes)),
+                borderColor: 'blue',
+                fill: false
+            }]
+        }
+    });
+</script>

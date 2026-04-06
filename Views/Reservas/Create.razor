@@ -1,0 +1,25 @@
+﻿@model WebExamen.Models.Reserva
+
+<div class="container mt-4">
+    <div class="card shadow-sm p-4 mx-auto" style="max-width: 500px;">
+        <h4 class="text-center">Realizar Reserva</h4>
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="HotelId" value="@ViewBag.HotelId" />
+
+            <div class="form-group mb-3">
+                <label class="form-label">Fecha de Inicio</label>
+                <input asp-for="FechaInicio" class="form-control" type="date" /> [cite: 64]
+                <span asp-validation-for="FechaInicio" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label">Fecha de Fin</label>
+                <input asp-for="FechaFin" class="form-control" type="date" /> [cite: 64]
+                <span asp-validation-for="FechaFin" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Confirmar Reserva</button>
+        </form>
+    </div>
+</div>
